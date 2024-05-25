@@ -1,0 +1,5 @@
+# Ignore configuration file
+config.yaml
+
+# Ignore log file
+qspace.log

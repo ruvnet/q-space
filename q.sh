@@ -42,7 +42,7 @@ main_menu() {
     display_ascii_art
     echo -e "${CYAN}Welcome to the ${APP_NAME} Deployment Wizard${NC}"
     echo -e "${BLUE}========================================${NC}"
-    echo -e "${ROCKET} ${GREEN}1. Easy Mode${NC}"
+    echo -e "${ROCKET} ${GREEN}1. Easy Install Mode${NC}"
     echo -e "${WRENCH} ${GREEN}2. Advanced Mode${NC}"
     echo -e "${COMPUTER} ${GREEN}3. Multiverse Mode${NC}"
     echo -e "${BOOK} ${GREEN}4. Help${NC}"
