@@ -1,0 +1,12 @@
+[package]
+name = "q-space"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+async-std = "1.10"
+colored = "2.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "0.8"
+azure_sdk_for_rust = { git = "https://github.com/Azure/azure-sdk-for-rust" }
+qsharp = { git = "https://github.com/microsoft/qsharp-runtime" }
