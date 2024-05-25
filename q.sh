@@ -102,7 +102,7 @@ check_and_install_libraries() {
 # Function to configure Azure CLI and Quantum Workspace
 configure_azure() {
     echo -e "${CYAN}Configuring Azure CLI and Quantum Workspace...${NC}"
-    az login
+    az login --use-device-code
     read -p "Enter your Azure subscription ID: " subscription_id
     az account set --subscription $subscription_id
     read -p "Enter the resource group name: " resource_group
