@@ -7,7 +7,6 @@
 
    Q-Space Deployment Wizard
    created by rUv
-
 ```
 # Q-Space Deployment Wizard
 ### Deploy every possibility, for everyhing, everywhere, all at once.
