@@ -8,7 +8,7 @@
    Q-Space Deployment Wizard
    created by rUv
 ```
-# Q-Space Deployment Wizard
+# Quantum Deployment Wizard
 ### Deploy every possibility, for everyhing, everywhere, all at once.
 
 ## Introduction
