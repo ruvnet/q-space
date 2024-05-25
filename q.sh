@@ -36,7 +36,7 @@ display_ascii_art() {
 
 # Function to display the main menu
 main_menu() {
-    clear
+    display_ascii_art
     echo -e "${CYAN}Welcome to the ${APP_NAME} Deployment Wizard${NC}"
     echo -e "${BLUE}========================================${NC}"
     echo -e "${GREEN}1. Easy Mode${NC} ${ROCKET}"
@@ -291,9 +291,9 @@ workspace = Workspace(
 
 params = EstimatorParams(num_items=2)
 params.items[0].qubit_params.name = QubitParams.GATE_US_E3
-params.items[0].qec_scheme.name = QECScheme.SURFACE_CODE
+params.items[0].qec_scheme.name = QECScheme.SURFACE CODE
 params.items[1].qubit_params.name = QubitParams.MAJ_NS_E6
-params.items[1].qec_scheme.name = QECScheme.FLOQUET_CODE
+params.items[1].qec_scheme.name = QECScheme.FLOQUET CODE
 
 result_batch = estimate("QuantumServerless.TestBellState", params=params)
 print(result_batch.summary_data_frame())
