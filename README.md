@@ -9,7 +9,7 @@
    created by rUv
 ```
 # Quantum Deployment Wizard
-### Deploy every possibility, for everyhing, everywhere, all at once.
+### Deploy every possibility, for everything, everywhere, all at once.
 
 ## Introduction
 
