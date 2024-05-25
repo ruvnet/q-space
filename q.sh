@@ -7,6 +7,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 CYAN='\033[0;36m'
 NC='\033[0m' # No Color
+PINK='\033[0;35m' # Define pink color
 
 # Define emojis
 CHECK_MARK="\xE2\x9C\x85"
@@ -29,8 +30,10 @@ display_ascii_art() {
     echo "|  |  |__   |   __|     |   --|   __|"
     echo "|__  _|_____|__|  |__|__|_____|_____|"
     echo "   |__|                              "
-    echo "   Q-Space Deployment Wizard"
-    echo "   created by rUv"
+    echo " "
+    echo "   Quantum Deployment Wizard"
+    echo "   Every possibility, everywhere, all at once."
+    echo -e " ${PINK}  created by rUv${NC}"
     echo -e "${NC}"
 }
 
@@ -39,11 +42,11 @@ main_menu() {
     display_ascii_art
     echo -e "${CYAN}Welcome to the ${APP_NAME} Deployment Wizard${NC}"
     echo -e "${BLUE}========================================${NC}"
-    echo -e "${GREEN}1. Easy Mode${NC} ${ROCKET}"
-    echo -e "${GREEN}2. Advanced Mode${NC} ${WRENCH}"
-    echo -e "${GREEN}3. Multiverse Mode${NC} ${COMPUTER}"
-    echo -e "${GREEN}4. Help${NC} ${BOOK}"
-    echo -e "${GREEN}5. Exit${NC} ${CROSS_MARK}"
+    echo -e "${ROCKET} ${GREEN}1. Easy Mode${NC}"
+    echo -e "${WRENCH} ${GREEN}2. Advanced Mode${NC}"
+    echo -e "${COMPUTER} ${GREEN}3. Multiverse Mode${NC}"
+    echo -e "${BOOK} ${GREEN}4. Help${NC}"
+    echo -e "${CROSS_MARK} ${GREEN}5. Exit${NC}"
     echo -e "${BLUE}========================================${NC}"
     read -p "Choose an option: " choice
     case $choice in
@@ -55,7 +58,6 @@ main_menu() {
         *) echo -e "${RED}Invalid option!${NC}" && sleep 2 && main_menu ;;
     esac
 }
-
 # Function to display help
 display_help() {
     clear
