@@ -3,3 +3,4 @@ pip
 jq
 azure-quantum
 qsharp
+asyncclick
