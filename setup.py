@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='qspace',
-    version='0.0.5',
+    version='0.0.6',
     packages=find_packages(where='src'),  # Specify src directory
     package_dir={'': 'src'},  # Define the root package directory
     install_requires=[
