@@ -15,6 +15,24 @@
 
 Welcome to Q-Space, a cutting-edge deployment wizard designed to simplify the process of setting up and managing quantum computing applications using Azure Quantum and Azure Functions. Whether you're a beginner or an advanced user, Q-Space provides a user-friendly interface to deploy, configure, and optimize quantum applications seamlessly.
 
+# Installation and Setup
+
+To get started with Q-Space, follow these steps:
+
+## Step 1: Install Q-Space
+
+Use the following pip command to install Q-Space:
+
+```sh
+pip install qspace
+```
+## Step 2: Run Q-Space
+After installing, you can start the Q-Space Deployment Wizard by running:
+
+```
+qspace
+```
+
 ## Brief Technical Introduction
 
 Q-Space leverages the power of Azure Quantum, a cloud-based quantum computing service, and Azure Functions, a serverless compute service, to create a robust framework for quantum computing. This combination allows users to run quantum algorithms, perform resource estimations, and manage quantum jobs efficiently.
