@@ -1,4 +1,3 @@
-
 from setuptools import setup, find_packages
 from pathlib import Path
 
@@ -8,8 +7,9 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name='qspace',
-    version='0.0.4',
-    packages=find_packages(),
+    version='0.0.5',
+    packages=find_packages(where='src'),  # Specify src directory
+    package_dir={'': 'src'},  # Define the root package directory
     install_requires=[
         'twine',
         'setuptools',
@@ -18,14 +18,17 @@ setup(
         'black',
         'pytest',
         'pip-upgrader',
+        'asyncclick',
+        'azure-quantum',
+        'qsharp',
+        'pyyaml',
     ],
     entry_points={
         'console_scripts': [
-            'qspace=qspace.cli:main',
+            'qspace=q:cli',  # Update to point to q.cli
         ],
     },
     author='rUv',
-    author_email='',
     description='Q-Space, a cutting-edge deployment wizard designed to simplify the process of setting up and managing quantum computing applications using Azure Quantum and Azure Functions.',
     long_description=long_description,
     long_description_content_type='text/markdown',
