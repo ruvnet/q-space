@@ -6,3 +6,4 @@ qspace.log
 dist
 qspace.egg-info
 build
+.env
