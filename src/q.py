@@ -3,8 +3,10 @@ import asyncio
 import subprocess
 import yaml
 import os
+import shutil
 from azure.quantum import Workspace
 from qsharp import compile
+from datetime import datetime
 
 # Define colors for retro-futuristic BBS style UI
 RED = '\033[0;31m'
@@ -27,7 +29,6 @@ HELP = "\xE2\x9D\x93"
 # Application name
 APP_NAME = "Q-Space"
 
-
 def display_ascii_art():
     """Function to display ASCII art."""
     print(f"{CYAN}")
@@ -41,9 +42,6 @@ def display_ascii_art():
     print("   Every possibility, everywhere, all at once.")
     print(f" {PINK}  created by rUv{NC}")
     print(f"{NC}")
-
-
-import shutil
 
 async def check_and_install_libraries():
     """Function to check and install required libraries."""
@@ -62,8 +60,6 @@ async def check_and_install_libraries():
         else:
             print(f"{GREEN}{lib} is already installed.{NC} {CHECK_MARK}")
 
-
-
 async def configure_azure():
     """Function to configure Azure CLI and Quantum Workspace."""
     print(f"{CYAN}Configuring Azure CLI and Quantum Workspace...{NC}")
@@ -76,7 +72,6 @@ async def configure_azure():
     subprocess.run(["az", "quantum", "workspace", "create", "-g", resource_group, "-w", workspace_name, "-l", location])
     subprocess.run(["az", "quantum", "workspace", "set", "-g", resource_group, "-w", workspace_name])
     print(f"{GREEN}Azure CLI and Quantum Workspace configured successfully.{NC} {CHECK_MARK}")
-
 
 async def save_configuration(subscription_id, resource_group, workspace_name, location):
     """Function to save configuration to a YAML file."""
@@ -91,7 +86,6 @@ async def save_configuration(subscription_id, resource_group, workspace_name, lo
         yaml.dump(config, file)
     print(f"{GREEN}Configuration saved successfully.{NC} {CHECK_MARK}")
 
-
 async def load_configuration():
     """Function to load configuration from a YAML file."""
     if os.path.exists("config.yaml"):
@@ -104,7 +98,6 @@ async def load_configuration():
         print(f"{RED}Configuration file not found. Please run the configuration step first.{NC}")
         return None
 
-
 async def deploy_application(resource_group, workspace_name, location):
     """Function to deploy the quantum application."""
     print(f"{CYAN}Deploying the quantum application...{NC}")
@@ -112,7 +105,6 @@ async def deploy_application(resource_group, workspace_name, location):
                     "--consumption-plan-location", location, "--runtime", "python",
                     "--functions-version", "3", "--name", workspace_name, "--storage-account", workspace_name])
     print(f"{GREEN}Quantum application deployed successfully.{NC} {CHECK_MARK}")
-
 
 async def deploy_custom_function(resource_group, workspace_name):
     """Function to deploy custom functions."""
@@ -122,13 +114,11 @@ async def deploy_custom_function(resource_group, workspace_name):
                     "--resource-group", resource_group, "--name", workspace_name, "--src", function_path])
     print(f"{GREEN}Custom function deployed successfully.{NC} {CHECK_MARK}")
 
-
 async def setup_resource_estimation():
     """Function to set up resource estimation."""
     print(f"{CYAN}Setting up resource estimation...{NC}")
     subprocess.run(["pip", "install", "azure-quantum", "qsharp"])
     print(f"{GREEN}Resource estimation setup complete.{NC} {CHECK_MARK}")
-
 
 async def run_resource_estimation(subscription_id, location):
     """Function to run resource estimation."""
@@ -152,12 +142,10 @@ async def run_resource_estimation(subscription_id, location):
     print(result)
     print(f"{GREEN}Resource estimation complete.{NC} {CHECK_MARK}")
 
-
 def log_operation(message):
     """Function to log operations."""
     with open("qspace.log", "a") as log_file:
         log_file.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - {message}\n")
-
 
 async def easy_mode():
     """Easy mode function."""
@@ -172,7 +160,7 @@ async def easy_mode():
         await run_resource_estimation(config["subscription_id"], config["location"])
         print(f"{GREEN}Easy Mode setup complete!{NC} {CHECK_MARK}")
         log_operation("Easy Mode setup complete")
-
+    await main_menu()
 
 async def advanced_mode():
     """Advanced mode function."""
@@ -212,9 +200,7 @@ async def advanced_mode():
             await main_menu()
         else:
             print(f"{RED}Invalid option!{NC}")
-            await asyncio.sleep(2)
-            await advanced_mode()
-
+    await advanced_mode()
 
 async def multiverse_mode():
     """Multiverse mode function."""
@@ -227,21 +213,21 @@ async def multiverse_mode():
     print(f"{GREEN}5. Return to Main Menu{NC}")
     print(f"{BLUE}========================================{NC}")
     choice = input("Choose an option: ")
-    if choice == "1":
-        await deploy_multiple_algorithms()
-    elif choice == "2":
-        await run_batch_estimations()
-    elif choice == "3":
-        await monitor_manage_jobs()
-    elif choice == "4":
-        await optimize_performance()
-    elif choice == "5":
-        await main_menu()
-    else:
-        print(f"{RED}Invalid option!{NC}")
-        await asyncio.sleep(2)
-        await multiverse_mode()
-
+    config = await load_configuration()
+    if config:
+        if choice == "1":
+            await deploy_multiple_algorithms()
+        elif choice == "2":
+            await run_batch_estimations(config)
+        elif choice == "3":
+            await monitor_manage_jobs(config)
+        elif choice == "4":
+            await optimize_performance()
+        elif choice == "5":
+            await main_menu()
+        else:
+            print(f"{RED}Invalid option!{NC}")
+    await multiverse_mode()
 
 async def deploy_multiple_algorithms():
     """Function to deploy multiple quantum algorithms."""
@@ -250,8 +236,7 @@ async def deploy_multiple_algorithms():
     print(f"{GREEN}Multiple quantum algorithms deployed successfully.{NC} {CHECK_MARK}")
     log_operation("Multiple quantum algorithms deployed")
 
-
-async def run_batch_estimations():
+async def run_batch_estimations(config):
     """Function to run batch resource estimations."""
     print(f"{CYAN}Running batch resource estimations...{NC}")
     workspace = Workspace(resource_id=config["subscription_id"], location=config["location"])
@@ -264,9 +249,9 @@ async def run_batch_estimations():
     print(result_batch.summary_data_frame())
     print(f"{GREEN}Batch resource estimations complete.{NC} {CHECK_MARK}")
     log_operation("Batch resource estimations complete")
+    await multiverse_mode()
 
-
-async def monitor_manage_jobs():
+async def monitor_manage_jobs(config):
     """Function to monitor and manage jobs."""
     print(f"{CYAN}Monitoring and managing jobs...{NC}")
     workspace = Workspace(resource_id=config["subscription_id"], location=config["location"])
@@ -274,7 +259,7 @@ async def monitor_manage_jobs():
         print(job.id, job.details.name, job.details.status)
     print(f"{GREEN}Job monitoring and management complete.{NC} {CHECK_MARK}")
     log_operation("Job monitoring and management complete")
-
+    await multiverse_mode()
 
 async def optimize_performance():
     """Function to optimize performance."""
@@ -284,7 +269,6 @@ async def optimize_performance():
         return "Hello, Quantum World!"
     print(f"{GREEN}Performance optimization complete.{NC} {CHECK_MARK}")
     log_operation("Performance optimization complete")
-
 
 async def main_menu():
     """Main menu function."""
@@ -310,8 +294,7 @@ async def main_menu():
         exit(0)
     else:
         print(f"{RED}Invalid option!{NC}")
-        await asyncio.sleep(2)
-        await main_menu()
+    await main_menu()
 
 async def display_help():
     """Function to display help."""
@@ -337,7 +320,6 @@ async def display_help():
 async def cli():
     """Entry point."""
     await main_menu()
-
 
 if __name__ == "__main__":
     asyncio.run(cli())
