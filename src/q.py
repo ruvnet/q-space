@@ -43,21 +43,25 @@ def display_ascii_art():
     print(f"{NC}")
 
 
+import shutil
+
 async def check_and_install_libraries():
     """Function to check and install required libraries."""
     print(f"{CYAN}Checking for required libraries...{NC}")
-    required_libraries = ["azure-cli", "pip", "jq"]
+    required_libraries = ["az", "pip", "jq"]
     for lib in required_libraries:
-        if not subprocess.run(["command", "-v", lib], capture_output=True).returncode == 0:
+        if not shutil.which(lib):
             print(f"{YELLOW}{lib} is not installed. Installing...{NC}")
-            if lib == "azure-cli":
-                subprocess.run(["curl", "-sL", "https://aka.ms/InstallAzureCLIDeb", "|", "sudo", "bash"])
+            if lib == "az":
+                subprocess.run(["curl", "-sL", "https://aka.ms/InstallAzureCLIDeb"], capture_output=True)
+                subprocess.run(["sudo", "bash", "InstallAzureCLIDeb"], capture_output=True)
             elif lib == "pip":
-                subprocess.run(["sudo", "apt-get", "install", "-y", "python3-pip"])
+                subprocess.run(["sudo", "apt-get", "install", "-y", "python3-pip"], capture_output=True)
             elif lib == "jq":
-                subprocess.run(["sudo", "apt-get", "install", "-y", "jq"])
+                subprocess.run(["sudo", "apt-get", "install", "-y", "jq"], capture_output=True)
         else:
             print(f"{GREEN}{lib} is already installed.{NC} {CHECK_MARK}")
+
 
 
 async def configure_azure():
@@ -336,4 +340,4 @@ async def cli():
 
 
 if __name__ == "__main__":
-    cli(_anyio_backend="asyncio")
+    asyncio.run(cli())
